@@ -92,12 +92,12 @@ public class JobCardServiceImpl implements JobCardService {
     jobCardEntity.setJobCardStatus(NEW);
 
     var savedJobCard = jobCardRepository.save(jobCardEntity);
-    var jobCardEstimated = createJobCardEstimate(savedJobCard);
-    var html = pdfservice.parseThymeleafTemplate(jobCardEstimated);
-    pdfservice.generatePdfFromHtml(html);
-    var docUploadRes = uploadJobCardToWhatsAppServer();
-    var response = sendJobCardToWhatsApp(savedJobCard.getOwnerDetails().getPhone(),
-        docUploadRes.getId());
+//    var jobCardEstimated = createJobCardEstimate(savedJobCard);
+//    var html = pdfservice.parseThymeleafTemplate(jobCardEstimated);
+//    pdfservice.generatePdfFromHtml(html);
+//    var docUploadRes = uploadJobCardToWhatsAppServer();
+//    var response = sendJobCardToWhatsApp(savedJobCard.getOwnerDetails().getPhone(),
+//        docUploadRes.getId());
     addJobCardRes.put("jobCardId", savedJobCard.getId());
 
     return addJobCardRes;
