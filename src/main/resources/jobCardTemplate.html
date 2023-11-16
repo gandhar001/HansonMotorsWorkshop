@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Job Card</title>
+</head>
+<body>
+
+<div class="header" style="text-align: right; font-size: 12px;">
+
+  <img class="" style="width:200px; height:200px; float: left; margin: 20px;" src=""
+       th:src="@{classpath:resources/img/hansonmotorslogo1.png}" alt=""/>
+
+  <h2>Hanson Motors Estimate</h2>
+  <p><strong>Hanson Motors</strong></p>
+  <p>Maqbool Pura Chowk</p>
+  <p>G.T.Road, 400 Meters From Nexus Mall of Amritsar</p>
+  <p>Amritsar Punjab 143001</p>
+  <p>Multibrand Premium Vehicle Workshop - Since 1979</p>
+  <p>9872884034, 9501177332</p>
+  <p>Email: hansonmotor@gmail.com &amp; raghav4034@yahoo.com</p>
+
+</div>
+
+
+<div class="customer-box" style="background-color:lightblue;width: 100%;">
+
+  <p>
+    <strong>Customer Details</strong>
+    <span style="margin-left:40%"><b>Hanson Motors Estimate #</b></span>
+    <span th:text="${jobCardEntity.id}"></span>
+  </p>
+
+  <p>
+  <p th:text="${jobCardEntity.ownerDetails.name}"></p>
+  <span style="margin-left:50%"><b>Date</b></span>
+  <span th:text="${jobCardEntity.dateOfService}"></span>
+  </p>
+
+  <p>Tax no:
+    <span th:text="${jobCardEntity.vehicleDetails.vehicleNumber}"></span>
+    <span th:text="${jobCardEntity.vehicleDetails.model}"></span>
+
+    <span th:text="${jobCardEntity.vehicleDetails.kilometers}"></span>
+
+  </p>
+  <p th:text="${jobCardEntity.ownerDetails.phone}"></p>
+
+
+</div>
+
+<!--<table class="custom-table" style="width:100%;">-->
+
+<!--  <thead>-->
+
+<!--  <tr>-->
+
+<!--    <th scope="col" class="header-cell" style="width:10%">#</th>-->
+
+<!--    <th scope="col" class="header-cell" style="width:30%">Item</th>-->
+
+<!--    <th scope="col" class="header-cell" th:each="type : ${repairTypes}" th:text="${type}">Type</th>-->
+
+<!--    <th scope="col" style="padding-right: 90px;">Quantity</th>-->
+
+<!--    <th scope="col" style="padding-right: 50px;">Price</th>-->
+
+<!--    <th scope="col" style="padding-right: 50px;">Amount</th>-->
+
+<!--  </tr>-->
+
+<!--  <tr>-->
+
+<!--    <th colspan="10">-->
+<!--      <hr></hr>-->
+<!--    </th>-->
+
+<!--  </tr>-->
+
+
+<!--  </thead>-->
+
+
+<!--  <tbody>-->
+
+<!--  <tr>-->
+
+<!--    <th scope="row"></th>-->
+
+<!--  </tr>-->
+
+<!--  <tr th:each="repairType : ${jobCardEntity.repairTypes}">-->
+
+
+<!--    <th scope="row">1</th>-->
+<!--    <td th:text="${repairType.repairType}"></td>-->
+
+<!--    <td th:text="${repairType.quantity}"></td>-->
+
+<!--    <td th:text="${repairType.cost}"></td>-->
+
+<!--    <td th:text="${repairType.cost * repairType.quantity}"></td>-->
+
+<!--  </tr>-->
+
+<!--  <tr>-->
+
+<!--    <th colspan="10">-->
+<!--      <hr></hr>-->
+<!--    </th>-->
+
+<!--  </tr>-->
+
+
+<!--  <tr>-->
+
+<!--    <td colspan="4">-->
+
+
+<!--      <div class="payment-instructions" style="float: left; font-size: 10px;">-->
+
+<!--        <h2>Payment Instructions</h2>-->
+
+<!--        <p>Terms: Cash only. Regret for not accepting credit cards this time.</p>-->
+
+<!--        <p>Cheques and all online payments are subject to encashment.</p>-->
+
+<!--        <p>GST Extra where applicable.</p>-->
+
+
+<!--      </div>-->
+
+<!--      <div class="summary-section" style="text-align:right;">-->
+
+<!--        <p>Subtotal: ₹<span th:text="${subtotal}">0.00</span></p>-->
+
+<!--        <p>Total: ₹<span th:text="${total}">0.00</span></p>-->
+
+
+<!--      </div>-->
+<!--      <hr style="height: 1px; background-color: #000; width: 50%;margin-left:80%;">-->
+
+
+<!--      <div class="total-box"-->
+<!--           style="background-color: grey;width: 300px; height: 100px;margin-left:80%;">-->
+
+<!--        <p><strong>Total Amount</strong></p>-->
+
+<!--        <p>Total: ₹<span th:text="${total}">0.00</span></p>-->
+
+<!--      </div>-->
+
+<!--    </td>-->
+
+<!--  </tr>-->
+
+<!--  </tbody>-->
+
+<!--</table>-->
+
+<br><br></br></br>
+
+<p>-This is an estimate copy only not a final invoice.</p>
+
+<p>-T&amp;C apply according to workshop job card.</p>
+
+<p>-PickNDrop of the vehicle is entirely at the vehicle owner's risk.</p>
+
+<p>-Do not note down job works to PickNDrop boys, note down to Service Advisor Or WhatsApp at
+  9872884034</p>
+
+<p>-We request our customers to check your belongings while recieving vehicle.</p>
+
+<p>-This is automated link and will expire with-in 48 hours.</p>
+
+<p>-<strong>E.&amp;O.E.</strong></p>
+
+
+<hr style="background-color: lightblue; width: 80%; margin: 0;"></hr>
+
+<p>We thank you for choosing us to serve you, We appreciate feedbacks/suggestions at WhatsApp
+  8427010988</p>
+
+<div class="hanson-motors" style="margin-left: 70px;">
+
+  <p><strong>Hanson Motors</strong></p>
+
+  <img class="" style="width: 70px;" src="" th:src="@{classpath:resources/img/hansonmotorslogo.png}"
+       alt=""/>
+
+</div>
+
+<hr style="background-color: #000; width: 50%; margin-left: 10px ;"></hr>
+
+<div style="margin-left: 60px;">
+
+  <p>Date: <span th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"></span></p>
+
+</div>
+
+
+</body>
+
+</html>

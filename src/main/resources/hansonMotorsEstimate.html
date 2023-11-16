@@ -1,0 +1,610 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>file_1698813570493</title>
+  <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
+        }
+
+        .s1 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        h1 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 9pt;
+        }
+
+        .p,
+        p {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+            margin: 0pt;
+        }
+
+        .a,
+        a {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        h2 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s2 {
+            color: #202529;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s3 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s4 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s5 {
+            color: #202529;
+            font-family: "Trebuchet MS", sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s6 {
+            color: #202529;
+            font-family: "Trebuchet MS", sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s7 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+        }
+
+        .s8 {
+            color: black;
+            font-family: "Trebuchet MS", sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12.5pt;
+        }
+
+        .s9 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12.5pt;
+        }
+
+        .s10 {
+            color: #202529;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 7pt;
+        }
+
+        table,
+        tbody {
+            vertical-align: top;
+            overflow: visible;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+<div class="header" style="text-align: right; font-size: 12px;">
+  <img style="width:130px; height:130px; float: left; margin: 20px;"
+       src="data:image/jpg;base64,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"/>
+
+  <p class="s1" style="padding-top: 3pt; text-indent: 0pt; text-align: right">
+    Hanson Motors Estimate
+  </p>
+
+  <h1 style="padding-top: 8pt; text-indent: 0pt; text-align: right">
+    Hanson Motors
+  </h1>
+  <p style="
+        padding-top: 5pt;
+        padding-left: 343pt;
+        text-indent: 104pt;
+        line-height: 129%;
+        text-align: right;
+      ">
+    Maqbool Pura Chowk G.T.Road, 400Meters From Nexus Mall of Amritsar
+  </p>
+  <p style="text-indent: 0pt; line-height: 9pt; text-align: right">
+    Amritsar Punjab 143001
+  </p>
+  <p style="padding-top: 6pt; text-indent: 0pt; text-align: right">
+    Multibrand Premium Vehicle Workshop - Since 1979
+  </p>
+  <p style="padding-top: 2pt; text-indent: 0pt; text-align: right">
+    9872884034, 9501177332
+  </p>
+  <p style="padding-top: 2pt; text-indent: 0pt; text-align: right">
+    <a href="mailto:raghav4034@yahoo.com" class="a" target="_blank">hansonmotor@gmail.com &amp; </a><a
+      href="mailto:raghav4034@yahoo.com" target="_blank">raghav4034@yahoo.com</a>
+  </p>
+</div>
+
+<div
+    style="margin-top: 40px;margin-bottom:20px; background-color: azure; padding: 10px">
+  <p style=" text-align: center">
+    <span class="p" style="float : left;font-weight:bold"> Customer Details</span>
+    <span style="font-weight:bold">Hanson Motors Estimate #</span>
+    <span class="p" style="float : right; margin-right:100px"
+          th:text="${jobCardEntity.id}">10152</span>
+  </p>
+
+  <p style=" text-align: center;margin-top: 10px ">
+    <span class="p" style="float : left;"
+          th:text="${jobCardEntity.ownerDetails.name}">Abhishek</span>
+    <span style="margin-left:30px; font-weight:bold">Date</span>
+    <span class="p" style="float : right;"
+          th:text="${jobCardEntity.dateOfService}">Sep 13, 2023</span>
+  </p>
+
+  <p style=" text-align: left ;font-weight:bold; margin-top: 10px">Tax no. :
+    <span class="p" th:text="${jobCardEntity.vehicleDetails.vehicleNumber}">1234</span>
+    <span class="p" th:text="${jobCardEntity.vehicleDetails.model}">3422</span>
+    <span class="p" th:text="${jobCardEntity.vehicleDetails.kilometers}">1000</span>
+  </p>
+
+  <p style=" text-align: left;font-weight:bold ;margin-top: 10px">+91-
+    <span class="p" th:text="${jobCardEntity.ownerDetails.phone}">919191919919</span>
+  </p>
+
+
+</div>
+
+
+<div th:unless="${#lists.isEmpty(jobCardEntity.repairTypeAssoc)}">
+  <table style="border-collapse: collapse; margin-left: 5.90524pt" cellspacing="0">
+
+    <thead>
+    <tr style="height: 19pt">
+      <th style="
+            width: 282pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+            border-bottom-style: solid;
+            border-bottom-width: 1pt;
+            border-bottom-color: #dee2e6;
+          ">
+        <p class="s3" style="
+              padding-top: 4pt;
+              padding-left: 5pt;
+              text-indent: 0pt;
+              text-align: left;
+            ">
+          Item
+        </p>
+      </th>
+      <th style="
+            width: 93pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+            border-bottom-style: solid;
+            border-bottom-width: 1pt;
+            border-bottom-color: #dee2e6;
+          ">
+        <p class="s3" style="
+              padding-top: 4pt;
+              padding-left: 29pt;
+              padding-right: 29pt;
+              text-indent: 0pt;
+              text-align: center;
+            ">
+          Quantity
+        </p>
+      </th>
+      <th style="
+            width: 87pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+            border-bottom-style: solid;
+            border-bottom-width: 1pt;
+            border-bottom-color: #dee2e6;
+          ">
+        <p class="s3" style="
+              padding-top: 4pt;
+              padding-right: 20pt;
+              text-indent: 0pt;
+              text-align: right;
+            ">
+          Price
+        </p>
+      </th>
+      <th style="
+            width: 63pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+            border-bottom-style: solid;
+            border-bottom-width: 1pt;
+            border-bottom-color: #dee2e6;
+          ">
+        <p class="s3" style="
+              padding-top: 4pt;
+              padding-right: 5pt;
+              text-indent: 0pt;
+              text-align: right;
+            ">
+          Amount
+        </p>
+      </th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+
+    <tr style="height: 27pt" th:each="assocRepairType : ${jobCardEntity.repairTypeAssoc}">
+      <td style="
+            width: 282pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+          ">
+        <p class="s3" style="
+              padding-top: 4pt;
+              padding-left: 5pt;
+              text-indent: 0pt;
+              text-align: left;
+            " th:text="${{assocRepairType.repairType.repairType}}">
+          Periodic Maintenance Service
+        </p>
+        <div th:each="metaDataItem : ${assocRepairType.repairType.metaData}">
+          <p class="s4" style="
+              padding-top: 2pt;
+
+              padding-left: 5pt;
+              text-indent: 0pt;
+              text-align: left;
+            " th:text="${{metaDataItem}}">
+            Includes filteration &amp; lubrications replacement
+          </p>
+        </div>
+
+      </td>
+      <td style="
+            width: 93pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+          ">
+        <p class="s4" style="padding-top: 4pt; text-indent: 0pt; text-align: center"
+
+           th:text="${{assocRepairType.quantity}}">
+          1
+        </p>
+      </td>
+      <td style="
+            width: 87pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+          ">
+        <p class="s5" style="
+              padding-top: 4pt;
+              padding-right: 20pt;
+              text-indent: 0pt;
+              text-align: right;
+            ">
+          ₹<span class="s4" th:text="${{assocRepairType.repairType.cost}}">1,500.00</span>
+        </p>
+      </td>
+      <td style="
+            width: 63pt;
+            border-top-style: solid;
+            border-top-width: 1pt;
+            border-top-color: #dee2e6;
+          ">
+        <p class="s5" style="
+              padding-top: 4pt;
+              padding-right: 5pt;
+              text-indent: 0pt;
+              text-align: right;
+            ">
+          ₹<span class="s4" th:text="${{assocRepairType.amount}}">1,500.00</span>
+        </p>
+      </td>
+    </tr>
+    </tbody>
+
+
+  </table>
+</div>
+
+<div style="margin-top: 20px; padding: 10px">
+
+  <p><span style="font-weight:bold;">Payment Instruction</span><span style="float : right;">Subtotal:  <span
+      class="s6">₹</span>  <span
+      style="font-weight:bold"
+      th:text="${jobCardEntity.estimatedServiceAmount}">1500.0</span> </span>
+  </p>
+
+  <p>
+  <div style="width:50% ;">Terms cash only. Regret for not taking credit cards this time. Cheques
+    &amp; all online payments are subject to encashment. GST Extra where as
+    applicable.
+  </div>
+  <span style="float : right;">Total:  <span class="s6">₹</span>
+      <span style="font-weight:bold" th:text="${jobCardEntity.estimatedServiceAmount}">1500.0</span> </span>
+  </p>
+
+
+</div>
+
+
+<div
+    style="margin-top: 30px;margin-bottom:10px;background-color:azure;width: 30%;padding: 10px;
+    margin-left: auto; margin-right: 0;">
+  <p class="s7" style="
+  padding-top: 6pt;
+  padding-left: 6pt;
+  text-indent: 0pt;
+  text-align: left;
+">
+    Total
+  </p>
+  <p class="s8" style="
+  padding-top: 6pt;
+  padding-left: 96pt;
+  text-indent: 0pt;
+  text-align: left;
+">
+    ₹<span class="s9" th:text="${jobCardEntity.estimatedServiceAmount}">10,298.00</span>
+  </p>
+</div>
+
+
+<p style="
+        padding-top: 4pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -This is an estimate copy only not final invoice.
+</p>
+<p style="
+        padding-top: 2pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -T&amp;C apply according to workshop jobcard.
+</p>
+<p style="
+        padding-top: 2pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -PickNDrop of vehicle is entirely at vehicle owner risk.
+</p>
+<p style="
+        padding-top: 4pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -Do not note down job works to PickNDrop boys, note down to Service
+  Advisor Or WhatsApp at 9872884034
+</p>
+<p style="
+        padding-top: 2pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -We request our customers to check your belongings while recieving
+  vehicle.
+</p>
+<p style="
+        padding-top: 2pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -This is automated link and will expire with-in 48 hours.
+</p>
+<p style="
+        padding-top: 2pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  -<b>E. &amp; O.E.</b>
+</p>
+<p style="text-indent: 0pt; text-align: left"><br/></p>
+<p style="
+        padding-left: 11pt;
+        text-indent: 0pt;
+        line-height: 1pt;
+        text-align: left;
+      "/>
+<p style="
+        padding-top: 5pt;
+        padding-left: 11pt;
+        text-indent: 0pt;
+        text-align: left;
+      ">
+  We thank you for choosing us to serve you, We appreciate feedbacks/
+  suggestions at WhatsApp 8427010988
+</p>
+<h2 style="
+        padding-top: 4pt;
+        padding-left: 106pt;
+        text-indent: 0pt;
+        text-align: center;
+      ">
+  Hanson Motors
+</h2>
+<p style="text-indent: 0pt; text-align: left"><br/></p>
+<p style="text-indent: 0pt; text-align: left"><br/></p>
+<p style="padding-left: 122pt; text-indent: 0pt; text-align: left">
+<div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <img width="37" height="24"
+             src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAYACUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7m+L/AMVdfi8T/wDCD+CxA2tTwxeZqFtKk1zYzMxkEX2eRBCXeCOaRRJMmVRycYTfnn4reLPhp43uLfxvPBqWkahNZWttKkMOnRWJYsJJuZZd8RUFmLS71dAPLCyKxT4saF4r8D/Eo+P/AA/ocet6VJHZi7sdKhZtQmuYluolZ0AAkjMdyUL7tyERPtZYSknxd8F/hn41+Jnxfk8FfFvxRrl5NpuqW6Rad4hmnu1z5dzP9qhiuH2NlbTyh5kUiFbokrkAHk1bbk3df0j6q1KNGlTpQg4yjq3upJJyu17ytbRLddHd3/ReT45/DmHVV0uXx74ah1NnSNbKXV7dJmZwCgCF8ksGXGBzkY6129fmZ+0P+yTolt8S9S03wppmq6zepa215LJpNqPIti5kHlT21pbFVdhHuBQwDYR8pbLtH4F034r/AA28G/8ACJN4x8e6ZZNIPsVta+FbmSS1cleIWe4ibB248s5T5mIUMS1ae3h1Zwf2PjGlOEVKL1TTWt/Wz+9I/TiivG/2aPG+s+MfCDSax4l0nxLII4bmJ7a9inv7ZJd7CG8WKGJFdFCrkKNxV8gY5K1jJTSkjzMRQqYarKjVVpR0Z2Hiv4kP4Tv9Tik8L+INUtbG1s7k3Wk2LXPnGeeWIxxovzO0QiEjhQSqOp6kA+b6/wDEqx8c3Muna38FfFN+7WI8s3+jqwaGWMXEkSzZKxvuhhXYXU+b5O7Zsd4iim1fRmMZODUouzR0+kaL4V0zwhostp8NLiLTbm0l1OWK602KSexk8pGZbmMl53nfCp+7SViY8E/dzzviPxfo3h6GCX/hTOoanZTTWqLPp2gmXak6hvNeLyRMqxLnzQY96sUVVc7/ACyihK2iHKUptyk7tnr3ha7W+02Sf+yn0dmuZt1tJHsY/vGxIeBkuMP3+9gkkGiiimRuf//Z"/>
+      </td>
+    </tr>
+  </table>
+</div>
+</p>
+<p style="text-indent: 0pt; text-align: left"><br/></p>
+<p style="
+        padding-left: 29pt;
+        text-indent: 0pt;
+        line-height: 1pt;
+        text-align: left;
+      "/>
+<p class="s10" style="padding-left: 106pt; text-indent: 0pt; text-align: center">
+  Sep 13, 2023
+</p>
+</body>
+
+</html>
