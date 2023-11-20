@@ -74,7 +74,6 @@ public class JobCardServiceImpl implements JobCardService {
     var addedRepairTypes = jobCardDto.getRepairTypes();
 
     mapJobCardRepairType(jobCardEntity, addedRepairTypes);
-
     jobCardEntity.setJobCardStatus(NEW);
 
     var savedJobCard = jobCardRepository.save(jobCardEntity);
