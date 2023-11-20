@@ -15,9 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 @FeignClient(url = "https://graph.facebook.com/v17.0/147749711744908", name = "cloud-api")
 public interface WhatAppFeignClient {
 
-//  @PostMapping("/message")
-//  ResponseEntity<WhatsappResDTO> sendMessage(@RequestBody WhatsappReqDTO whatsappReqDTO,
-//      @RequestHeader("Authorization") String authCode) throws Exception;
+  @PostMapping("/message")
+  ResponseEntity<WhatsappResDTO> sendMessage(@RequestBody WhatsappReqDTO whatsappReqDTO,
+      @RequestHeader("Authorization") String authCode) throws Exception;
 
   @PostMapping(value = "/media", consumes = {"multipart/form-data"})
   ResponseEntity<DocUploadRes> uploadMedia(@RequestPart(value = "file") MultipartFile file,

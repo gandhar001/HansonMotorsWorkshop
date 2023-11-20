@@ -7,12 +7,10 @@ import static com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.service.impl
 import com.HansonMotors.HansonMotorsWorkshop.app.exception.exceptionClasses.ResourceNotFoundException;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.JobCardDto;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.JobCardRepairTypeReqDto;
-import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.RepairTypeDto;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.UpdateJobCardDto;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.whatsapp.DocUploadRes;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.whatsapp.Document;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.whatsapp.WhatsappDocReqDTO;
-import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.request.whatsapp.WhatsappReqDTO;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.response.JobCardEstimateRepairTypeDto;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.response.JobCardEstimateResDto;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.dto.response.JobCardRepairTypeDto;
@@ -25,20 +23,10 @@ import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.enums.JobCardStatus
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.feignProxies.WhatAppFeignClient;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.repository.JobCardRepository;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.repository.RepairTypeRepository;
-import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.service.defintions.BillService;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.service.defintions.JobCardService;
-import com.lowagie.text.DocumentException;
-
 import jakarta.transaction.Transactional;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,10 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.mock.web.MockMultipartFile;
 
 
 @Service
@@ -63,14 +51,12 @@ public class JobCardServiceImpl implements JobCardService {
   private final JobCardRepository jobCardRepository;
   private final RepairTypeRepository repairTypeRepository;
   private final static ModelMapper modelMapper = new ModelMapper();
-  private final BillService billService;
   private final PdfService pdfservice;
   private final WhatAppFeignClient whatAppFeignClient;
-  private final String token = "Bearer EAAMBC51nfZAwBO0zIPTP2WLHmZBoPC6IwWla5BdRBrA3ZCeivWU6GHEquywRpgLO0iFip6pR4IGHSNtwgUwBC8Dw6TxO0iiX7s7KnPHw2MBAALI0THpWRzBJtRtMYIA2Yj1g7FmnMg6gZCQZBly7tweF2aUsnY1xxhZCMtPPuuv1ZCVSVXRwZBKZB4HbA9ErTS4DVN52lLO7zY1J3QcW6YbUZD";
+  @Value("${whatsapp.auth_token}")
+  private String whatsAppAuthToken;
   private final static TypeMap<JobCardDto, JobCard> propertyMapper = modelMapper.createTypeMap(
       JobCardDto.class, JobCard.class);
-  private final static TypeMap<JobCardRepairType, JobCardRepairTypeDto> propertyMapperRepairType = modelMapper.createTypeMap(
-      JobCardRepairType.class, JobCardRepairTypeDto.class);
   private final static TypeMap<JobCard, JobCardResponseDto> propertyMapperJobCardEntityToDto = modelMapper.createTypeMap(
       JobCard.class, JobCardResponseDto.class);
   private final static TypeMap<JobCard, JobCardEstimateResDto> propertyMapperJobCardEntityToEstimateDto = modelMapper.createTypeMap(
@@ -92,18 +78,30 @@ public class JobCardServiceImpl implements JobCardService {
     jobCardEntity.setJobCardStatus(NEW);
 
     var savedJobCard = jobCardRepository.save(jobCardEntity);
-//    var jobCardEstimated = createJobCardEstimate(savedJobCard);
-//    var html = pdfservice.parseThymeleafTemplate(jobCardEstimated);
-//    pdfservice.generatePdfFromHtml(html);
-//    var docUploadRes = uploadJobCardToWhatsAppServer();
-//    var response = sendJobCardToWhatsApp(savedJobCard.getOwnerDetails().getPhone(),
-//        docUploadRes.getId());
+    var jobCardEstimated = createJobCardEstimate(savedJobCard);
+    var html = pdfservice.parseThymeleafTemplate(jobCardEstimated);
+    pdfservice.generatePdfFromHtml(html);
+    var docUploadRes = uploadJobCardToWhatsAppServer();
+    var response = sendJobCardToWhatsApp(savedJobCard.getOwnerDetails().getPhone(),
+        docUploadRes.getId());
     addJobCardRes.put("jobCardId", savedJobCard.getId());
 
     return addJobCardRes;
 
   }
 
+//  private DocUploadRes sendWelcomeMessage() throws Exception {
+//    String inputPath =
+//        "C:\\Users\\gandh\\Desktop\\Hanson Motors\\pdf files" + File.separator + "jobCard.pdf";
+//
+//    FileInputStream input = new FileInputStream(inputPath);
+//    MultipartFile multipartFile = new MockMultipartFile("file", "jobCard", "application/pdf",
+//        IOUtils.toByteArray(input));
+//    var result = whatAppFeignClient.uploadMedia(multipartFile, "application/pdf", "whatsapp",
+//        whatsAppAuthToken);
+//    var res = result.getBody();
+//    return res;
+//  }
 
   private DocUploadRes uploadJobCardToWhatsAppServer() throws Exception {
     String inputPath =
@@ -113,7 +111,7 @@ public class JobCardServiceImpl implements JobCardService {
     MultipartFile multipartFile = new MockMultipartFile("file", "jobCard", "application/pdf",
         IOUtils.toByteArray(input));
     var result = whatAppFeignClient.uploadMedia(multipartFile, "application/pdf", "whatsapp",
-        token);
+        whatsAppAuthToken);
     var res = result.getBody();
     return res;
   }
@@ -123,7 +121,7 @@ public class JobCardServiceImpl implements JobCardService {
     var whatsAppDoc = WhatsappDocReqDTO.builder().type("document").messagingProduct("whatsapp")
         .recipientType("individual").to("91" + phoneNumber)
         .document(Document.builder().id(docId).caption("HansonMotorsEstimate").build()).build();
-    var response = whatAppFeignClient.sendDocument(whatsAppDoc, token);
+    var response = whatAppFeignClient.sendDocument(whatsAppDoc, whatsAppAuthToken);
     return response.getBody();
   }
 
