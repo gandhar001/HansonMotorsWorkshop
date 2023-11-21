@@ -25,7 +25,6 @@ import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.repository.JobCardR
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.repository.RepairTypeRepository;
 import com.HansonMotors.HansonMotorsWorkshop.app.jobCard.api.service.defintions.JobCardService;
 import jakarta.transaction.Transactional;
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +54,8 @@ public class JobCardServiceImpl implements JobCardService {
   private final WhatAppFeignClient whatAppFeignClient;
   @Value("${whatsapp.auth_token}")
   private String whatsAppAuthToken;
+  @Value("${documents.jobCard.estimates}")
+  private String jobCardEstimatesPath;
   private final static TypeMap<JobCardDto, JobCard> propertyMapper = modelMapper.createTypeMap(
       JobCardDto.class, JobCard.class);
   private final static TypeMap<JobCard, JobCardResponseDto> propertyMapperJobCardEntityToDto = modelMapper.createTypeMap(
@@ -79,8 +80,8 @@ public class JobCardServiceImpl implements JobCardService {
     var savedJobCard = jobCardRepository.save(jobCardEntity);
     var jobCardEstimated = createJobCardEstimate(savedJobCard);
     var html = pdfservice.parseThymeleafTemplate(jobCardEstimated);
-    pdfservice.generatePdfFromHtml(html);
-    var docUploadRes = uploadJobCardToWhatsAppServer();
+    pdfservice.generatePdfFromHtml(html, jobCardEstimated.getId(), jobCardEstimatesPath);
+    var docUploadRes = uploadJobCardToWhatsAppServer(savedJobCard.getId());
     var response = sendJobCardToWhatsApp(savedJobCard.getOwnerDetails().getPhone(),
         docUploadRes.getId());
     addJobCardRes.put("jobCardId", savedJobCard.getId());
@@ -102,9 +103,8 @@ public class JobCardServiceImpl implements JobCardService {
 //    return res;
 //  }
 
-  private DocUploadRes uploadJobCardToWhatsAppServer() throws Exception {
-    String inputPath =
-        "C:\\Users\\gandh\\Desktop\\Hanson Motors\\pdf files" + File.separator + "jobCard.pdf";
+  private DocUploadRes uploadJobCardToWhatsAppServer(long jobCardId) throws Exception {
+    String inputPath = jobCardEstimatesPath + jobCardId + ".pdf";
 
     FileInputStream input = new FileInputStream(inputPath);
     MultipartFile multipartFile = new MockMultipartFile("file", "jobCard", "application/pdf",
